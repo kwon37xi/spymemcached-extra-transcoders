@@ -17,4 +17,4 @@ include 'services:webservice'
 */
 
 rootProject.name = 'spymemcached-extra-transcoders'
-include 'spymemcached-extra-transcoders-core', 'gzip-compress-transcoder', 'kryo-transcoder', 'lz4-compress-transcoder', 'snappy-compress-transcoder'
+include 'spymemcached-extra-transcoders-core', 'gzip-compress-transcoder', 'kryo-transcoder', 'lz4-compress-transcoder', 'snappy-compress-transcoder', 'fst-transcoder'

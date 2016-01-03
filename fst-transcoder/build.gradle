@@ -1,0 +1,8 @@
+ext {
+    fstVersion = '2.40'
+}
+
+dependencies {
+    project (':spymemcached-extra-transcoders-core')
+    compile "de.ruedigermoeller:fst:${fstVersion}"
+}
