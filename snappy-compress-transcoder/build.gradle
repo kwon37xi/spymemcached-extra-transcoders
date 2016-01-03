@@ -1,0 +1,8 @@
+ext {
+    snappyVersion = '1.1.2'
+}
+dependencies {
+    project (':spymemcached-extra-transcoders-core')
+    compile "org.xerial.snappy:snappy-java:${snappyVersion}"
+
+}

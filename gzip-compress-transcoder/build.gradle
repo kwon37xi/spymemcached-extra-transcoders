@@ -1,0 +1,3 @@
+dependencies {
+    project (':spymemcached-extra-transcoders-core')
+}
