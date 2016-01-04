@@ -1,13 +1,13 @@
 package kr.pe.kwonnam.spymemcached.extratranscoders;
 
 public class IntToBytesUtils {
+    public static final int INT_TO_BYTES_LENGTH = 4;
+
     /**
      * int value to 4 bytes array.
      */
     public static byte[] intToBytes(int value) {
-        return new byte[]{(byte) (value >>> 24), (byte) (value >>> 16), (byte) (value >>> 8), (byte) (value)
-
-        };
+        return new byte[]{(byte) (value >>> 24), (byte) (value >>> 16), (byte) (value >>> 8), (byte) (value)};
     }
 
     /**

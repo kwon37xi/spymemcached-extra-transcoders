@@ -1,13 +1,17 @@
 package kr.pe.kwonnam.spymemcached.extratranscoders.lz4;
 
+import kr.pe.kwonnam.spymemcached.extratranscoders.IntToBytesUtils;
 import kr.pe.kwonnam.spymemcached.extratranscoders.compresswrapper.AbstractCompressionWrapperTranscoder;
 import kr.pe.kwonnam.spymemcached.extratranscoders.compresswrapper.Compressor;
 import kr.pe.kwonnam.spymemcached.extratranscoders.compresswrapper.Decompressor;
 import net.spy.memcached.transcoders.Transcoder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
+
 public class Lz4CompressWrapperTranscoder<T> extends AbstractCompressionWrapperTranscoder<T> implements Compressor, Decompressor {
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 20; // 20kb
-    private static final int DECOMPRESSED_SIZE_STORE_BYTES = 4;
 
     public Lz4CompressWrapperTranscoder(Transcoder<T> wrappedTranscoder) {
         setWrappedTranscoder(wrappedTranscoder);
@@ -17,11 +21,21 @@ public class Lz4CompressWrapperTranscoder<T> extends AbstractCompressionWrapperT
 
     @Override
     public byte[] compress(byte[] bytes) {
-        return new byte[0];
+        final int originalBytesLength = bytes.length;
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream(originalBytesLength)) {
+            baos.write(IntToBytesUtils.intToBytes(originalBytesLength));
+
+            byte[] compressedBytes = Lz4CompressUtils.compress(bytes);
+            baos.write(compressedBytes);
+            return baos.toByteArray();
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to lz4-compress.", e);
+        }
     }
 
     @Override
     public byte[] decompress(byte[] bytes) {
-        return new byte[0];
+        final int decompressedSize = IntToBytesUtils.bytesToInt(Arrays.copyOf(bytes, IntToBytesUtils.INT_TO_BYTES_LENGTH));
+        return Lz4CompressUtils.decompressFast(bytes, IntToBytesUtils.INT_TO_BYTES_LENGTH, decompressedSize);
     }
 }
