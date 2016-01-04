@@ -10,6 +10,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * <a href="https://github.com/jpountz/lz4-java">lz4-java</a> based compression wrapper spymemcached transcoder.
+ */
 public class Lz4CompressWrapperTranscoder<T> extends AbstractCompressionWrapperTranscoder<T> implements Compressor, Decompressor {
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 20; // 20kb
 
@@ -29,7 +32,7 @@ public class Lz4CompressWrapperTranscoder<T> extends AbstractCompressionWrapperT
             baos.write(compressedBytes);
             return baos.toByteArray();
         } catch (IOException e) {
-            throw new IllegalStateException("Failed to lz4-compress.", e);
+            throw new IllegalStateException("Failed to compress with lz4.", e);
         }
     }
 
