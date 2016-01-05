@@ -11,7 +11,7 @@ import net.spy.memcached.transcoders.Transcoder;
  */
 public abstract class AbstractCompressionWrapperTranscoder<T> extends SpyObject implements Transcoder<T> {
     public static final int DEFAULT_COMPRESSION_THRESHOLD_BYTES_LENGTH = 1024 * 10;
-    public static final int DEFAULT_COMPRESSION_FLAG = 4; // 0b0100
+    public static final int DEFAULT_COMPRESSION_FLAG = 0B0100;
 
     private long compressionThresholdByteLength = DEFAULT_COMPRESSION_THRESHOLD_BYTES_LENGTH;
 
@@ -68,7 +68,7 @@ public abstract class AbstractCompressionWrapperTranscoder<T> extends SpyObject 
         final CachedData encodedCachedData = wrappedTranscoder.encode(object);
         final byte[] encodedBytes = encodedCachedData.getData();
 
-        if (encodedBytes == null || encodedBytes.length < compressionThresholdByteLength) {
+        if (encodedBytes.length < compressionThresholdByteLength) {
             return encodedCachedData;
         }
 
