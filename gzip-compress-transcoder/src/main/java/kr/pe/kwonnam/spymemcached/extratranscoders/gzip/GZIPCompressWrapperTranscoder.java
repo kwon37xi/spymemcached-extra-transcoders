@@ -14,12 +14,12 @@ import java.util.zip.GZIPOutputStream;
 /**
  * {@link java.util.zip.GZIPInputStream}/{@link java.util.zip.GZIPOutputStream} based compression wrapper spymemcached transcoder.
  */
-public class GzipCompressWrapperTranscoder<T> extends AbstractCompressionWrapperTranscoder<T> implements Compressor, Decompressor {
+public class GZIPCompressWrapperTranscoder<T> extends AbstractCompressionWrapperTranscoder<T> implements Compressor, Decompressor {
     public static final int DEFAULT_UBFFER_SIZE = 8192; // 8k
 
     private int bufferSize = DEFAULT_UBFFER_SIZE;
 
-    public GzipCompressWrapperTranscoder(Transcoder<T> wrappedTranscoder) {
+    public GZIPCompressWrapperTranscoder(Transcoder<T> wrappedTranscoder) {
         setWrappedTranscoder(wrappedTranscoder);
         setCompressor(this);
         setDecompressor(this);
@@ -38,6 +38,7 @@ public class GzipCompressWrapperTranscoder<T> extends AbstractCompressionWrapper
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              GZIPOutputStream gzos = new GZIPOutputStream(baos)) {
             gzos.write(bytes);
+            gzos.close();
             return baos.toByteArray();
         } catch (IOException e) {
             throw new IllegalStateException("Failed to compress with gzip.", e);
@@ -55,6 +56,7 @@ public class GzipCompressWrapperTranscoder<T> extends AbstractCompressionWrapper
             while ((readByteLength = gzis.read(buffer)) > 0) {
                 baos.write(buffer, 0, readByteLength);
             }
+            baos.flush();
             return baos.toByteArray();
         } catch (IOException e) {
             throw new IllegalStateException("Failed to decompress with gzip.", e);
