@@ -3,7 +3,6 @@ package kr.pe.kwonnam.spymemcached.extratranscoders.lz4;
 import net.spy.memcached.CachedData;
 import net.spy.memcached.transcoders.Transcoder;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
