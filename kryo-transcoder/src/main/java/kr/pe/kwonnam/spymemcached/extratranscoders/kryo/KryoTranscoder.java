@@ -6,6 +6,7 @@ import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.pool.KryoCallback;
 import com.esotericsoftware.kryo.pool.KryoFactory;
 import com.esotericsoftware.kryo.pool.KryoPool;
+import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
 import com.esotericsoftware.kryo.serializers.EnumNameSerializer;
 import net.spy.memcached.CachedData;
 import net.spy.memcached.transcoders.Transcoder;
@@ -18,7 +19,7 @@ import org.objenesis.strategy.StdInstantiatorStrategy;
  */
 public class KryoTranscoder<T> implements Transcoder<T> {
     /**
-     * Default KryoFactory - supports non-constructor call object  instantiation and name based enum serialization.
+     * Default KryoFactory - supports non-constructor call object instantiation, field change compatibility and name based enum serialization.
      */
     public static final KryoFactory DEFAULT_KRYO_FACTORY = new KryoFactory() {
         @Override
@@ -28,6 +29,9 @@ public class KryoTranscoder<T> implements Transcoder<T> {
             // First, try to instantiate an object with no-args constructor,
             // Second, if first fails then try to instantiate an object without constructor calls.
             kryo.setInstantiatorStrategy(new Kryo.DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
+
+            // field change compatibility support.
+            kryo.setDefaultSerializer(CompatibleFieldSerializer.class);
 
             // enum named based serializer
             kryo.addDefaultSerializer(Enum.class, EnumNameSerializer.class);
