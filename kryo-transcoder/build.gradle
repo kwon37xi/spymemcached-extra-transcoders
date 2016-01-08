@@ -3,6 +3,6 @@ ext {
 }
 
 dependencies {
-    project (':spymemcached-extra-transcoders-core')
+    compile project(':spymemcached-extra-transcoders-core')
     compile "com.esotericsoftware:kryo:${kryoVersion}"
 }

@@ -7,7 +7,7 @@ import net.jpountz.lz4.LZ4SafeDecompressor;
 
 /**
  * Lz4 Compression Utils. L4z is much faster than gzip
- * <p/>
+ * <br>
  * <a href="https://github.com/jpountz/lz4-java">lz4-java</a>
  *
  * @author KwonNam Son (kwon37xi@gmail.com)
