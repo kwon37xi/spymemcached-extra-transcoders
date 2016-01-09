@@ -24,7 +24,7 @@ public class KryoTranscoderTest {
     }
 
     @Test
-    public void setGetKryoPool() throws Exception {
+    public void constructor_with_KryoFactory() throws Exception {
         final KryoFactory kryoFactory = new KryoFactory() {
             @Override
             public Kryo create() {
@@ -32,11 +32,9 @@ public class KryoTranscoderTest {
             }
         };
 
-        final KryoPool kryoPool = new KryoPool.Builder(kryoFactory).softReferences().build();
+        kryoTranscoder = new KryoTranscoder<>(kryoFactory);
 
-        kryoTranscoder.setKryoPool(kryoPool);
-
-        assertThat(kryoTranscoder.getKryoPool()).isSameAs(kryoPool);
+        assertThat(kryoTranscoder.getKryoFactory()).isSameAs(kryoFactory);
     }
 
     @Test
@@ -58,13 +56,13 @@ public class KryoTranscoderTest {
 
         // encode
         final CachedData encodedData = kryoTranscoder.encode(user);
+        log.debug("Encoded User flags : {}, data : {}", encodedData.getFlags(), encodedData.getData());
         assertThat(encodedData.getFlags()).isEqualTo(0);
-        assertThat(encodedData.getData()).isNotNull();
+        assertThat(encodedData.getData()).isNotEmpty();
 
         // decode
         final User decodedUser = (User) kryoTranscoder.decode(encodedData);
         log.debug("DecodedUser : {}", decodedUser);
-
         assertThat(decodedUser.getName()).isEqualTo(user.getName());
         assertThat(decodedUser.getBirthday()).isEqualTo(user.getBirthday());
         assertThat(decodedUser.getSex()).isEqualTo(user.getSex());
@@ -112,7 +110,7 @@ public class KryoTranscoderTest {
         }
     }
 
-    private static enum Sex {
+    private enum Sex {
         MALE, FEMALE
     }
 }

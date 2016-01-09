@@ -13,7 +13,7 @@ import net.spy.memcached.transcoders.Transcoder;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
 /**
- * <a href="https://github.com/EsotericSoftware/kryo">Kryo</a> based Object Serialization/Deserialization.
+ * <a href="https://github.com/EsotericSoftware/kryo">Kryo</a> based spymemcached transcoder.
  *
  * @param <T> Object Type
  */
@@ -40,15 +40,6 @@ public class KryoTranscoder<T> implements Transcoder<T> {
     };
 
     /**
-     * Default KryoPool - pool of {@link Kryo} instances which are instantiated by {@link KryoFactory}.
-     *
-     * @see KryoPool
-     * @see KryoFactory
-     * @see Kryo
-     */
-    public static final KryoPool DEFAULT_KRYO_POOL = new KryoPool.Builder(DEFAULT_KRYO_FACTORY).softReferences().build();
-
-    /**
      * Default Kryo Output bufferSize
      */
     public static final int DEFAULT_BUFFER_SIZE = 8096;
@@ -56,37 +47,48 @@ public class KryoTranscoder<T> implements Transcoder<T> {
     /**
      * Default Kryo Output maxBufferSize - Unlimited
      */
-    public static final int DEFUALT_MAX_BUFFER_SIZE_UNLIMITED = -1;
+    public static final int DEFAULT_MAX_BUFFER_SIZE_UNLIMITED = -1;
 
-    private KryoPool kryoPool = DEFAULT_KRYO_POOL;
+    private final KryoFactory kryoFactory;
+
+    private final KryoPool kryoPool;
 
     private int bufferSize = DEFAULT_BUFFER_SIZE;
 
-    private int maxBufferSize = DEFUALT_MAX_BUFFER_SIZE_UNLIMITED;
+    private int maxBufferSize = DEFAULT_MAX_BUFFER_SIZE_UNLIMITED;
 
     public KryoTranscoder() {
-    }
-
-    public KryoTranscoder(KryoPool kryoPool) {
-        setKryoPool(kryoPool);
+        this(DEFAULT_KRYO_FACTORY);
     }
 
     /**
-     * return kryoPool
+     * Constructor with {@link KryoFactory}.
+     *
+     * @param kryoFactory kryoFactory which build {@link Kryo} instances.
+     */
+    public KryoTranscoder(KryoFactory kryoFactory) {
+        this.kryoFactory = kryoFactory;
+        this.kryoPool = createKryoPool();
+    }
+
+    /**
+     * Default KryoPool - pool of {@link Kryo} instances which are instantiated by {@link KryoFactory}.
+     * <br>
+     * This can be overridden.
      *
      * @return kryoPool
      */
-    public KryoPool getKryoPool() {
-        return kryoPool;
+    protected KryoPool createKryoPool() {
+        return new KryoPool.Builder(kryoFactory).softReferences().build();
     }
 
     /**
-     * set kryoPool
+     * get KryoFactory instance.
      *
-     * @param kryoPool a KryoPool instance.
+     * @return kryoFactory
      */
-    public void setKryoPool(KryoPool kryoPool) {
-        this.kryoPool = kryoPool;
+    public KryoFactory getKryoFactory() {
+        return kryoFactory;
     }
 
     /**
@@ -98,6 +100,7 @@ public class KryoTranscoder<T> implements Transcoder<T> {
 
     /**
      * set Kryo Output buffer size
+     * Default value is {@link #DEFAULT_BUFFER_SIZE}.
      *
      * @param bufferSize buffer size(bytes)
      * @see Output
@@ -117,6 +120,7 @@ public class KryoTranscoder<T> implements Transcoder<T> {
 
     /**
      * set Kryo Output max buffer size
+     * Default value is {@link #DEFAULT_MAX_BUFFER_SIZE_UNLIMITED}
      *
      * @param maxBufferSize max buffer size(bytes)
      * @see Output
@@ -146,7 +150,9 @@ public class KryoTranscoder<T> implements Transcoder<T> {
             @Override
             public T execute(Kryo kryo) {
                 final Input input = new Input(cachedData.getData());
-                return (T) kryo.readClassAndObject(input);
+                @SuppressWarnings("unchecked")
+                final T deserialized = (T) kryo.readClassAndObject(input);
+                return deserialized;
             }
         });
     }
