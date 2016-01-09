@@ -31,6 +31,7 @@ public class Lz4CompressWrapperTranscoder<T> extends AbstractCompressionWrapperT
             byte[] compressedBytes = Lz4CompressUtils.compress(bytes);
             baos.write(compressedBytes);
             baos.flush();
+            baos.close();
             return baos.toByteArray();
         } catch (IOException e) {
             throw new IllegalStateException("Failed to compress with lz4.", e);

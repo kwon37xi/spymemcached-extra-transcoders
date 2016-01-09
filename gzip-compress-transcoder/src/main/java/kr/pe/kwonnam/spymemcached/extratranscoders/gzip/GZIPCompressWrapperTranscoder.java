@@ -38,6 +38,7 @@ public class GZIPCompressWrapperTranscoder<T> extends AbstractCompressionWrapper
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              GZIPOutputStream gzos = new GZIPOutputStream(baos)) {
             gzos.write(bytes);
+            gzos.flush();
             gzos.close();
             return baos.toByteArray();
         } catch (IOException e) {
