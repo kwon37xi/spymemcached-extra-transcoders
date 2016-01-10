@@ -21,20 +21,21 @@ compile "kr.pe.kwonnam.spymemcached-extra-transcoders:gzip-compress-transcoder:$
 
 ## Usage
 ```java
-Transcoder<Object> transcoder = .. configure serialize transcoder ..;
+Transcoder<Object> transcoder = .. configure serialization transcoder ..;
 GZIPCompressWrapperTranscoder<Object> gzipCompressWrapperTranscoder = 
     new GZIPCompressWrapperTranscoder<>(transcoder);
 
 // Spymemcached configuration
 
 ConnectionFactoryBuilder  connectionFactoryBuilder = new ConnectionFactoryBuilder();
-  // ... configure connectionFactoryBuilder ...
 connectionFactoryBuilder.setTranscoder(gzipCompressWrapperTranscoder);
+  // ... configure etc ...
 
 MemcachedClient memcachedClient = 
     new MemcachedClient(connectionFactoryBuilder.build(), AddrUtil.getAddresses("memcachedhost:port"));
 ```
 
+## Other configuration properties
 * `GZIPCompressWrapperTranscoder.setCompressionThresholdByteLength` : Only when decoded byte length is over `compressionThresholdByteLength`, compression proceeds or just passes the data to spymemcached.
 * `GZIPCompressWrapperTranscoder.setCompressionFlag(int)` : set Memcached flag for GZIP Compression. When compress this flag is set and only when this flag is set, decomression proceeds. Default `0B0100`.
 * `GZIPCompressWrapperTranscoder.setBufferSize(int)` : set GZIP buffer size in bytes. Default `8192` bytes.
