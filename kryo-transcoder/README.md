@@ -7,7 +7,7 @@ Serialize objects with [Kryo](https://github.com/EsotericSoftware/kryo) serializ
 `Kryo` instance is NOT thread-safe. So you must not share the object among many threads.
 
 Kryo 3 introduced `KryoFactory` and `KryoPool` configuration.
-`KryoPool` give `Kryo` instances which is created by `KryoFactory` to each thread. This makes `Kryo` instances to be reused without being shared in many threads.
+`KryoPool` provides pooled `Kryo` instances which is created by `KryoFactory` to each thread. This makes `Kryo` instances to be reused without being shared in many threads.
 Thanks to this, there is no performance loss for creating many `Kryo` instances for each request.
 
 ### `DEFAULT_KRYO_FACTORY`
