@@ -14,8 +14,6 @@ import java.util.Arrays;
  * <a href="https://github.com/jpountz/lz4-java">lz4-java</a> based compression wrapper spymemcached transcoder.
  */
 public class Lz4CompressWrapperTranscoder<T> extends AbstractCompressionWrapperTranscoder<T> implements Compressor, Decompressor {
-    private static final int DEFAULT_BUFFER_SIZE = 1024 * 20; // 20kb
-
     public Lz4CompressWrapperTranscoder(Transcoder<T> wrappedTranscoder) {
         setWrappedTranscoder(wrappedTranscoder);
         setCompressor(this);
