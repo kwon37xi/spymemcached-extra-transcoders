@@ -11,10 +11,10 @@ Kryo 3 introduced `KryoFactory` and `KryoPool` configuration.
 Thanks to this, there is no performance loss for creating many `Kryo` instances for each request.
 
 ### `DEFAULT_KRYO_FACTORY`
-`KryoFactory` instantiate `Kryo` object.
-`DEFAULT_KRYO_FACTORY` instantiate `Kryo` object with the following configuraiton.
+`KryoFactory` instantiates `Kryo` objects.
+`DEFAULT_KRYO_FACTORY` instantiates `Kryo` objects with the following configuraiton.
 
-* Can serialize/deserialize without constructor calls. Because of this even though there is no zero-argument constructor, Kryo can serialize/deserializethe object.
+* Can serialize/deserialize without constructor calls. Because of this even though there is no zero-argument constructor, Kryo can serialize/deserialize no-zero-args-constructor objects.
 * Field change compatibility support with `CompatibleFieldSerializer`
 * Enum name based serialization with `EnumNameSerializer` - If you use ordinal based enum serialization, you must not change the enum items's order.
 
