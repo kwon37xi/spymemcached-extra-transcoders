@@ -5,7 +5,8 @@ This is wapper transcoder, it requires a serialization transcoder.
 ## Configuration
 ```java
 Transcoder<Object> transcoder = .. configure serialize transcoder ..;
-GZIPCompressWrapperTranscoder<Object> gzipCompressWrapperTranscoder = new GZIPCompressWrapperTranscoder<>(transcoder);
+GZIPCompressWrapperTranscoder<Object> gzipCompressWrapperTranscoder = 
+    new GZIPCompressWrapperTranscoder<>(transcoder);
 
 // Spymemcached configuration
 
@@ -13,7 +14,8 @@ ConnectionFactoryBuilder  connectionFactoryBuilder = new ConnectionFactoryBuilde
   // ... configure connectionFactoryBuilder ...
 connectionFactoryBuilder.setTranscoder(gzipCompressWrapperTranscoder);
 
-MemcachedClient memcachedClient = new MemcachedClient(connectionFactoryBuilder.build(), AddrUtil.getAddresses("memcachedhost:port"));
+MemcachedClient memcachedClient = 
+    new MemcachedClient(connectionFactoryBuilder.build(), AddrUtil.getAddresses("memcachedhost:port"));
 ```
 
 * `GZIPCompressWrapperTranscoder.setCompressionThresholdByteLength` : Only when decoded byte length is over `compressionThresholdByteLength`, compression proceeds or just passes the data to spymemcached.
