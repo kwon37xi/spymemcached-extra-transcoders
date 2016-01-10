@@ -36,6 +36,6 @@ MemcachedClient memcachedClient =
 ```
 
 ## Other configuration properties
-* `GZIPCompressWrapperTranscoder.setCompressionThresholdByteLength` : Only when decoded byte length is over `compressionThresholdByteLength`, compression proceeds or just passes the data to spymemcached.
+* `GZIPCompressWrapperTranscoder.setCompressionThresholdByteLength` : Only when the decoded byte length is over `compressionThresholdByteLength`, compression proceeds or just passes the data to spymemcached.
 * `GZIPCompressWrapperTranscoder.setCompressionFlag(int)` : set Memcached flag for GZIP Compression. When compress this flag is set and only when this flag is set, decomression proceeds. Default `0B0100`.
 * `GZIPCompressWrapperTranscoder.setBufferSize(int)` : set GZIP buffer size in bytes. Default `8192` bytes.
