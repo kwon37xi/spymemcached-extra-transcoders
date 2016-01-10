@@ -5,6 +5,7 @@ Serialize objects with [FST](http://ruedigermoeller.github.io/fast-serialization
 
 ## Features
 `FSTConfiguration` is thread-safe but synchronized. Because of synchronization, it is slow when shared among many threads.
+
 `FSTTranscoder` instantiates `FSTConfiguration` for each thread so there is no shared instances.
 Thanks to this, there is no performance loss for synchronization.
 
@@ -25,7 +26,7 @@ compile "kr.pe.kwonnam.spymemcached-extra-transcoders:fst-transcoder:${version}"
 
 ## Usage
 ```java
-FstTranscoder<Object> fstTranscoder = new FstTranscoder<>(); // use DEFAULT_FSTCONFIGURATION_FACTORY
+FSTTranscoder<Object> fstTranscoder = new FSTTranscoder<>(); // use DEFAULT_FSTCONFIGURATION_FACTORY
 
 // Spymemcached configuration
 
@@ -49,7 +50,7 @@ FSTConfigurationFactory myConfigFactory = new FSTConfigurationFactory() {
     }
 }
 
-FstTranscoder<Object> fstTranscoder = new FstTranscoder<>(myConfigFactory);
+FSTTranscoder<Object> fstTranscoder = new FSTTranscoder<>(myConfigFactory);
 ...
 
 ```
