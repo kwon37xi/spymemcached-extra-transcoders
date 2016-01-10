@@ -14,7 +14,7 @@ Thanks to this, there is no performance loss for creating many `Kryo` instances 
 `KryoFactory` instantiates `Kryo` objects.
 `DEFAULT_KRYO_FACTORY` instantiates `Kryo` objects with the following configuraiton.
 
-* Can serialize/deserialize without constructor calls. Because of this even though there is no zero-argument constructor, Kryo can serialize/deserialize no-zero-args-constructor objects.
+* Can serialize/deserialize without constructor calls. Because of this even though classes without no zero-argument constructor, Kryo can serialize/deserialize the class's objects.
 * Field change compatibility support with `CompatibleFieldSerializer`
 * Enum name based serialization with `EnumNameSerializer` - If you use ordinal based enum serialization, you must not change the enum items's order.
 
