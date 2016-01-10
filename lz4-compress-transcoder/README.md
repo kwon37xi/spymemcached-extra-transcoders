@@ -37,7 +37,7 @@ MemcachedClient memcachedClient =
 ```
 
 ## Other configuration properties
-* `Lz4CompressWrapperTranscoder.setCompressionThresholdByteLength` : Only when the decoded byte length is over `compressionThresholdByteLength`, compression proceeds or just passes the data to spymemcached.
+* `Lz4CompressWrapperTranscoder.setCompressionThresholdByteLength(long)` : Only when the decoded byte length is over `compressionThresholdByteLength`, compression proceeds or just passes the data to spymemcached.
 * `Lz4CompressWrapperTranscoder.setCompressionFlag(int)` : set Memcached flag for lz4 Compression. 
    When compressing the data, this flag is also set. 
    When decoding the cached data, this flag is checked and if it is set decompression proceeds or just passes the cached data to the wrapped transcoder.
