@@ -1,4 +1,4 @@
-# LZ4 Compress Transcoder
+# LZ4 Compress Spymemcached Transcoder
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/lz4-compress-transcoder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/lz4-compress-transcoder)
 
 Compresses serialized data with [lz4-java](https://github.com/jpountz/lz4-java) compression algorithm.

@@ -1,4 +1,4 @@
-# GZIP Compress Transcoder
+# GZIP Compress Spymemcached Transcoder
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/gzip-compress-transcoder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/gzip-compress-transcoder)
 
 Compresses serialized data with GZIP compression algorithm([GZIPInputStream](https://docs.oracle.com/javase/7/docs/api/java/util/zip/GZIPInputStream.html), [GZIPOutputStream](https://docs.oracle.com/javase/7/docs/api/java/util/zip/GZIPOutputStream.html)).

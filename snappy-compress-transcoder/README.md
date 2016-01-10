@@ -1,4 +1,4 @@
-# Snappy Compress Transcoder
+# Snappy Compress Spymemcached Transcoder
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/snappy-compress-transcoder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/snappy-compress-transcoder)
 
 Compresses serialized data with [snappy-java](https://github.com/xerial/snappy-java) compression algorithm.

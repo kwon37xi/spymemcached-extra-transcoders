@@ -1,4 +1,4 @@
-# FST Serialization Transcoder
+# FST Serialization Spymemcached Transcoder
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/fst-transcoder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.spymemcached-extra-transcoders/fst-transcoder)
 
 Serialize objects with [FST](http://ruedigermoeller.github.io/fast-serialization/) serializer.
@@ -40,7 +40,9 @@ MemcachedClient memcachedClient =
 
 ## Other configuration properties
 ### `FSTConfigurationFactory` implementation
-If you want to use your own `FSTConfiguration` configuration, implement `kr.pe.kwonnam.spymemcached.extratranscoders.fst.FSTConfigurationFactory` and pass to the constructor of `FSTTranscoder`.
+If you want to use your own `FSTConfiguration` configuration, implement `kr.pe.kwonnam.spymemcached.extratranscoders.fst.FSTConfigurationFactory` 
+and pass to the constructor of `FSTTranscoder`.
+
 ```java
 FSTConfigurationFactory myConfigFactory = new FSTConfigurationFactory() {
     public FSTConfiguration create() {
