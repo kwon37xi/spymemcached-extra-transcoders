@@ -1,8 +1,11 @@
 ext {
     snappyVersion = '1.1.2'
+    projectModuleDescription = 'Snappy Compression Spymemcached Transcoder'
 }
 dependencies {
     compile project(':spymemcached-extra-transcoders-core')
     compile "org.xerial.snappy:snappy-java:${snappyVersion}"
 
 }
+
+apply from: '../gradle/upload_archives.gradle'

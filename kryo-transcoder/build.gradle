@@ -1,8 +1,11 @@
 ext {
     kryoVersion = '3.0.3'
+    projectModuleDescription = 'Kryo Spymemcached Transcoder'
 }
 
 dependencies {
     compile project(':spymemcached-extra-transcoders-core')
     compile "com.esotericsoftware:kryo:${kryoVersion}"
 }
+
+apply from: '../gradle/upload_archives.gradle'

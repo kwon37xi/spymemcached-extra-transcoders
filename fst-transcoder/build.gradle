@@ -1,8 +1,11 @@
 ext {
     fstVersion = '2.40'
+    projectModuleDescription = 'FST Spymemcached Transcoder'
 }
 
 dependencies {
     compile project(':spymemcached-extra-transcoders-core')
     compile "de.ruedigermoeller:fst:${fstVersion}"
 }
+
+apply from: '../gradle/upload_archives.gradle'

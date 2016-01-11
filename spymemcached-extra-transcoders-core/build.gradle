@@ -1,5 +1,6 @@
 ext {
     spymemcachedVersion = '2.11.0'
+    projectModuleDescription = 'Spymemcached Extra Transcoders core'
 }
 dependencies {
     compile "net.spy:spymemcached:${spymemcachedVersion}"
@@ -9,3 +10,5 @@ dependencies {
     testCompile project(":lz4-compress-transcoder")
     testCompile project(":snappy-compress-transcoder")
 }
+
+apply from: '../gradle/upload_archives.gradle'

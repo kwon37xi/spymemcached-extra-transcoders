@@ -5,7 +5,7 @@ import net.spy.memcached.transcoders.Transcoder;
 import org.nustaq.serialization.FSTConfiguration;
 
 /**
- * <a href="">FST(fast-serialization)</a> based spymemcached transcoder.<br>
+ * <a href="http://ruedigermoeller.github.io/fast-serialization/">FST(fast-serialization)</a> based spymemcached transcoder.<br>
  */
 public class FSTTranscoder<T> implements Transcoder<T> {
 

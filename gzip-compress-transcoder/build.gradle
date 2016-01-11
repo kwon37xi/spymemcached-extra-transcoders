@@ -1,3 +1,9 @@
+ext {
+    projectModuleDescription = 'GZIP Compression Spymemcached Transcoder'
+}
+
 dependencies {
     compile project(':spymemcached-extra-transcoders-core')
 }
+
+apply from: '../gradle/upload_archives.gradle'
