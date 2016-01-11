@@ -40,7 +40,11 @@ public class GZIPCompressWrapperTranscoder<T> extends AbstractCompressionWrapper
             gzos.write(bytes);
             gzos.flush();
             gzos.close();
-            return baos.toByteArray();
+            final byte[] compressedBytes = baos.toByteArray();
+            if (getLogger().isDebugEnabled()) {
+                getLogger().debug(String.format("gzip-compression original-size : %d compressed-size : %d", bytes.length, compressedBytes.length));
+            }
+            return compressedBytes;
         } catch (IOException e) {
             throw new IllegalStateException("Failed to compress with gzip.", e);
         }

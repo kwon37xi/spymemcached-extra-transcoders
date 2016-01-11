@@ -3,4 +3,9 @@ ext {
 }
 dependencies {
     compile "net.spy:spymemcached:${spymemcachedVersion}"
+    testCompile project(":fst-transcoder")
+    testCompile project(":kryo-transcoder")
+    testCompile project(":gzip-compress-transcoder")
+    testCompile project(":lz4-compress-transcoder")
+    testCompile project(":snappy-compress-transcoder")
 }

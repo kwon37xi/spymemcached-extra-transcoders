@@ -27,6 +27,9 @@ public class Lz4CompressWrapperTranscoder<T> extends AbstractCompressionWrapperT
             baos.write(IntToBytesUtils.intToBytes(originalBytesLength));
 
             byte[] compressedBytes = Lz4CompressUtils.compress(bytes);
+            if (getLogger().isDebugEnabled()) {
+                getLogger().debug(String.format("lz4-compression original-size : %d compressed-size : %d", bytes.length, compressedBytes.length));
+            }
             baos.write(compressedBytes);
             baos.flush();
             baos.close();

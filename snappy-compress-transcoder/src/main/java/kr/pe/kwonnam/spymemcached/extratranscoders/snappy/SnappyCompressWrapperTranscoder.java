@@ -22,7 +22,11 @@ public class SnappyCompressWrapperTranscoder<T> extends AbstractCompressionWrapp
     @Override
     public byte[] compress(byte[] bytes) {
         try {
-            return Snappy.compress(bytes);
+            final byte[] compressedBytes = Snappy.compress(bytes);
+            if (getLogger().isDebugEnabled()) {
+                getLogger().debug(String.format("snappy-compression original-size : %d compressed-size : %d", bytes.length, compressedBytes.length));
+            }
+            return compressedBytes;
         } catch (IOException e) {
             throw new IllegalStateException("Failed to compress with snappy.", e);
         }

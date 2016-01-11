@@ -44,6 +44,7 @@ public class FSTTranscoderTest {
     @Test
     public void encode_decode() throws Exception {
         final Post post = new Post("Introducing FSTTranscoder", new Date(), PostType.LONG);
+        post.setContents("Hello FSTTranscoder!!");
 
         // encode
         final CachedData encodedData = fstTranscoder.encode(post);
@@ -57,6 +58,7 @@ public class FSTTranscoderTest {
         assertThat(decodedPost.getTitle()).isEqualTo(post.getTitle());
         assertThat(decodedPost.getCreatedAt()).isEqualTo(post.getCreatedAt());
         assertThat(decodedPost.getPostType()).isEqualTo(post.getPostType());
+        assertThat(decodedPost.getContents()).isEqualTo(post.getContents());
     }
 
     @Test
@@ -77,6 +79,7 @@ public class FSTTranscoderTest {
         private String title;
         private Date createdAt;
         private PostType postType;
+        private String contents;
 
         public Post(String title, Date createdAt, PostType postType) {
             this.title = title;
@@ -96,17 +99,26 @@ public class FSTTranscoderTest {
             return postType;
         }
 
+        public String getContents() {
+            return contents;
+        }
+
+        public void setContents(String contents) {
+            this.contents = contents;
+        }
+
         @Override
         public String toString() {
             return "Post{" +
                     "title='" + title + '\'' +
                     ", createdAt=" + createdAt +
                     ", postType=" + postType +
+                    ", contents='" + contents + '\'' +
                     '}';
         }
     }
 
-    private enum PostType {
+    public enum PostType {
         SHORT, LONG
     }
 }
